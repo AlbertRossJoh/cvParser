@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "cvParser", "cvParser\cvParser.fsproj", "{86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "QueryCV", "QueryCV\QueryCV.fsproj", "{76621EA7-2967-4837-847E-6C9F771A8F0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76621EA7-2967-4837-847E-6C9F771A8F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76621EA7-2967-4837-847E-6C9F771A8F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76621EA7-2967-4837-847E-6C9F771A8F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76621EA7-2967-4837-847E-6C9F771A8F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

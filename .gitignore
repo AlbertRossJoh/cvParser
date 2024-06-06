@@ -1,0 +1,6 @@
+
+*.deps.json
+*.pdb
+*.dll
+obj/
+bin/

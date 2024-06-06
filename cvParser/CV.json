@@ -1,0 +1,112 @@
+{
+  "name": {
+    "firstName": "Albert",
+    "middleName": "Ross",
+    "lastName": "Johannessen"
+  },
+  "contactInformation": {
+    "address": {
+      "city": "København",
+      "postalCode": "2300"
+    },
+    "phone": "+45 20 55 96 29",
+    "email": "albertrossj@gmail.com"
+  },
+  "languages": [
+    {
+      "language": "Dansk",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Fluent"
+    }
+  ],
+  "education": [
+    {
+      "institution": "ITU",
+      "degree": "BSC",
+      "fieldOfStudy": "Software development",
+      "startDate": "2022",
+      "endDate": "2025"
+    },
+    {
+      "institution": "KU",
+      "degree": "BSC",
+      "fieldOfStudy": "Computer science and economics",
+      "startDate": "2021",
+      "endDate": "2022"
+    },
+    {
+      "institution": "Ørestad Gymnasium - STX",
+      "degree": "",
+      "fieldOfStudy": "",
+      "startDate": "2017",
+      "endDate": "2020"
+    }
+  ],
+  "workExperience": [
+    {
+      "company": "Netcompany",
+      "title": "Analyst (Student position)",
+      "startDate": "Mar.2024",
+      "endDate": "Now",
+      "description": "As a part-time consultant and full-stack developer, I'm responsible for maintaining LER (Lednings ejer registeret), an older public sector GIS solution used for accessing buried cable and pipe information. I've gained some experience working with legacy applications on Windows servers, utilizing technologies such as older .NET versions, ASPX, and GML (XML) parsing."
+    },
+    {
+      "company": "Mancofi A/S",
+      "title": "Student full stack developer",
+      "startDate": "Mar. 2023",
+      "endDate": "Mar.2024",
+      "description": "As a part-time full-stack developer, I was actively engaged in a team tasked with developing a new microservice-based payment system utilizing most of the technologies listed. This experience provided me with a deeper understanding of modern practices within a landscape dominated by cloud hosting, Kubernetes orchestration, microservices architecture, and more."
+    },
+    {
+      "company": "e-nettet",
+      "title": "Student worker P&I",
+      "startDate": "Mar.2022",
+      "endDate": "Mar.2023",
+      "description": "In this position, I have worked extensively on mapping and communicating complex IT infrastructure. This has given me a good understanding of the processes and applications involved in running an IT product. In addition to this, I have briefly worked on scripting and assisted with server decommissioning."
+    },
+    {
+      "company": "MadEye Digital",
+      "title": "Junior SEO Specialist",
+      "startDate": "Okt.2021",
+      "endDate": "Dec.2021",
+      "description": "At MadEye, I worked on bringing in new page suppliers for SEO use, and in addition to this, I briefly held a sales position."
+    },
+    {
+      "company": "GLS",
+      "title": "Store Manager",
+      "startDate": "Jan.2021",
+      "endDate": "Sep.2021"
+    },
+    {
+      "company": "GLS",
+      "title": "Store assistant",
+      "startDate": "Sep.2020",
+      "endDate": "Dec.2020"
+    },
+    {
+      "company": "",
+      "title": "Various retail jobs",
+      "startDate": "2017",
+      "endDate": "2020"
+    }
+  ],
+  "skills": [
+    "Programming Languages: Python, Javascript (incl. React), C#, Java, Go, Dart",
+    "Frameworks & Libraries: ASP.NET, ASP.NET MVC, Node.js, Flutter, Angular",
+    "Databases & SQL: SQL Server",
+    "Cloud Technologies: Microsoft Azure",
+    "Version Control: Git",
+    "Project Management: Jira",
+    "Communication: Strong written and verbal communication skills"
+  ],
+  "personalQualifications": [
+    "Overview",
+    "Accommodating",
+    "Quick learner",
+    "Hardworking",
+    "Independent"
+  ]
+}
