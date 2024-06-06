@@ -6,12 +6,7 @@ module cvParser.Definitions
     open FuzzySharp
     open Graph.Types
 
-    type state =
-        | Enum of JsonElement.ObjectEnumerator
-        | Prop of JsonProperty
-        | Arr of JsonElement.ArrayEnumerator
-        | Item of string
-    
+   
     type aExp =
         | N of int
         | Add of aExp * aExp
@@ -34,44 +29,17 @@ module cvParser.Definitions
     let (./.) a b = Div (a, b)
     let (.%.) a b = Mod (a, b)
     
-    let toState = Enum
         
     
     let mp f (enum: IEnumerable<'a>) =
         Some(f enum |> Option.get)
     
-    let getArrOrObjEnumElm (st: JsonElement) =
-        if st.ValueKind = JsonValueKind.Array then
-            Arr(st.EnumerateArray())
-        else if st.ValueKind = JsonValueKind.Object then
-            Enum(st.EnumerateObject())
-        else
-            Item(st.ToString())
-    let rec getArrOrObjEnum (st: JsonProperty) =
-        getArrOrObjEnumElm st.Value
-    let rec firstDef st : state option =
-        match st with
-        | Enum st -> st |> Seq.tryHead |> Option.map Prop
-        | Prop st ->
-            firstDef (getArrOrObjEnum st)
-        | Arr st -> st |> Seq.tryHead |> Option.map getArrOrObjEnumElm
-        | st -> st |> Some
+
     let rec firstDefElm (st: JsonElement) =
         match st.ValueKind with
         | JsonValueKind.Array -> st.EnumerateArray() |> Seq.tryHead
         | JsonValueKind.Object -> st.EnumerateObject() |> Seq.tryHead |> Option.map _.Value
         | _ -> Some(st)
-    let rec lastDef st =
-        match st with
-        | Enum st -> st |> Seq.tryLast |> Option.map Prop
-        | Prop st -> getArrOrObjEnum st |> (firstDef)
-        | Arr arrayEnumerator ->
-            let mutable arr = arrayEnumerator
-            if arr.MoveNext() then
-                lastDef (Arr(arr))
-            else
-                arrayEnumerator.Current |> getArrOrObjEnumElm |> Some
-        | st -> st |> Some
             
     let lastDefElm (st: JsonElement) =
         match st.ValueKind with
@@ -79,28 +47,6 @@ module cvParser.Definitions
         | JsonValueKind.Object -> st.EnumerateObject() |> Seq.tryLast |> Option.map _.Value
         | _ -> Some(st)
         
-    let rec likeDef term (st: state) =
-        let search arr = Process.ExtractOne(term, arr)
-        match st with
-        | Enum st -> 
-            let result =
-                st
-                |> Seq.map (fun (x: JsonProperty) -> x.Name)
-                |> Seq.toArray
-                |> search
-            st
-            |> Seq.tryFind (fun x -> x.Name = result.Value) |> Option.map Prop 
-        | Prop st ->
-            getArrOrObjEnum st |> (likeDef term)
-        | Arr arrayEnumerator ->
-                let result =
-                    arrayEnumerator
-                    |> Seq.map _.ToString()
-                    |> Seq.toArray
-                    |> search
-                arrayEnumerator
-                |> Seq.tryFind (fun x -> x.ToString() = result.Value) |> Option.map getArrOrObjEnumElm
-        | st -> st |> Some
     let likeDefElm term (st: JsonElement) =
         let search arr = Process.ExtractOne(term, arr)
         match st.ValueKind with
@@ -121,12 +67,7 @@ module cvParser.Definitions
                 |> search
             enum |> Seq.tryFind (fun x -> x.Name = result.Value) |> Option.map _.Value
         | _ -> Some(st)
-    let rec idxDef idx st =
-        match st with
-        | Enum st -> st |> Seq.tryItem idx |> Option.map Prop
-        | Prop st -> getArrOrObjEnum st |> (idxDef idx)
-        | Arr arrayEnumerator -> arrayEnumerator |> Seq.tryItem idx |> Option.map getArrOrObjEnumElm
-        | st -> st |> Some
+
     let rec idxDefElm idx (st: JsonElement) =
         match st.ValueKind with
         | JsonValueKind.Array ->
@@ -136,12 +77,7 @@ module cvParser.Definitions
              let st = st.EnumerateObject()
              st |> Seq.tryItem idx |> Option.map _.Value
         | _ -> st |> Some
-    let rec getDef item st =
-        match st with
-        | Enum st -> st |> Seq.tryFind (fun x -> x.Name = item) |> Option.map Prop
-        | Prop st -> getArrOrObjEnum st |> (getDef item)
-        | Arr arrayEnumerator -> arrayEnumerator |> Seq.tryFind (fun x -> x.ToString() = item) |> Option.map getArrOrObjEnumElm
-        | st -> st |> Some
+
         
     let rec getDefElm item (st:JsonElement) =
         match st.ValueKind with
@@ -149,22 +85,8 @@ module cvParser.Definitions
         | JsonValueKind.Array -> st.EnumerateArray() |> Seq.tryFind (fun x -> x.ToString() = item) 
         | _ -> st |> Some
     
-    let extractDef (st: state) =
-        let res = 
-            match st with
-            | Enum st -> st :> obj
-            | Prop st -> st.Value :> obj
-            | Arr st -> st |> Seq.toList :> obj
-            | Item s -> s 
-        res
     let extractDefElm (st: JsonElement) =
-        // let res = 
-        //     match st with
-        //     | Enum st -> st :> obj
-        //     | Prop st -> st.Value :> obj
-        //     | Arr st -> st |> Seq.toList :> obj
-        //     | Item s -> s 
-        // res
+
         st
     
     
@@ -179,7 +101,7 @@ module cvParser.Definitions
         sm2 >>= fun i2 ->
         ret (f i1 i2)
     
-    let rec arithEval a : StateMonad<int, state> =
+    let rec arithEval a : StateMonad<int, JsonElement> =
         let nonZeroSndArgBinop f sm1 sm2 =
             sm1 >>= fun i1 ->
             sm2 >>= fun i2 ->
