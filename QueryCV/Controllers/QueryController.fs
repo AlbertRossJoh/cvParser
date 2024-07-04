@@ -13,7 +13,6 @@ type query = {
 type QueryController (logger : ILogger<QueryController>) =
     inherit ControllerBase()
 
-    [<HttpGet>]
-    member _.Get([<FromBody>] query: query) =
-        // printfn "%A" query.query
+    [<HttpPost>]
+    member _.Post([<FromBody>] query: query) =
         api.query query.query

@@ -1,6 +1,8 @@
 namespace QueryCV
 #nowarn "20"
+open System
 open Microsoft.AspNetCore.Builder
+open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 
@@ -18,6 +20,11 @@ module Program =
         let app = builder.Build()
 
         app.UseHttpsRedirection()
+        //b.WithOrigins([|""|]).AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+        let fb (b: CorsPolicyBuilder) =
+            b.WithOrigins([|"http://localhost:3000"|]).AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+            ()
+        app.UseCors(Action<CorsPolicyBuilder> fb)
 
         app.UseAuthorization()
         app.MapControllers()
