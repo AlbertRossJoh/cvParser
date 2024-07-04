@@ -4,5 +4,7 @@
     &lt;TestId&gt;NUnit3x::86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015::net8.0::cvParser.Tests.Test&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015::net8.0::cvParser.Tests.TestDefs&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015::net8.0::cvParser.Tests.TestParse&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015::net8.0::cvParser.Tests.TestSpeed&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::86CFBBA1-8FC8-4842-A7FB-E8CAFCD46015::net8.0::cvParser.Tests.TestList&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

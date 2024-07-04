@@ -87,26 +87,29 @@
       "endDate": "Dec.2020"
     },
     {
-      "company": "",
+      "company": "Kvickly, Bilka",
       "title": "Various retail jobs",
       "startDate": "2017",
       "endDate": "2020"
     }
   ],
-  "skills": [
-    "Programming Languages: Python, Javascript (incl. React), C#, Java, Go, Dart",
-    "Frameworks & Libraries: ASP.NET, ASP.NET MVC, Node.js, Flutter, Angular",
-    "Databases & SQL: SQL Server",
-    "Cloud Technologies: Microsoft Azure",
-    "Version Control: Git",
-    "Project Management: Jira",
-    "Communication: Strong written and verbal communication skills"
-  ],
+  "skills": {
+    "Programming Languages": ["C#","Java","Go","Dart", "JavaScript"],
+    "Frameworks & Libraries": ["ASP.NET", "ASP.NET MVC", "Flutter", "Angular"],
+    "Databases": ["SQL Server", "MongoDB"],
+    "Cloud Technologies": ["Microsoft Azure"],
+    "Version Control": ["Git"],
+    "Project Management": ["Jira"]
+  },
   "personalQualifications": [
     "Overview",
     "Accommodating",
     "Quick learner",
     "Hardworking",
     "Independent"
+  ],
+  "links": [
+    "https://github.com/AlbertRossJoh",
+    "https://www.linkedin.com/in/albert-ross-johannessen-006bba158/"
   ]
 }

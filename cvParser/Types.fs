@@ -1,4 +1,6 @@
-module Graph.Types
+module cvParser.Types
+
+    open System.Text.Json
 
 
     type StateMonad<'a, 'state> = SM of ('state -> ('a * 'state) option)  
@@ -22,3 +24,16 @@ module Graph.Types
         member this.Combine(a, b) = a >>= (fun _ -> b)
 
     let state = StateBuilder()
+    
+    
+    type state = {
+        elm: JsonElement option
+        lineNr: uint32
+        state: Map<string, JsonElement>
+    }
+    
+    let mkState (elm: JsonElement) : state = {
+        elm = Some(elm)
+        lineNr = 0u
+        state = Map.empty 
+    }

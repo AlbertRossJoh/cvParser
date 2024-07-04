@@ -5,6 +5,7 @@ open Microsoft.FSharp.Core
 open NUnit.Framework
 open JsonParse
 open Definitions
+open Types
 open cvParser.Definitions
 open FParsec
 open Parser
@@ -29,7 +30,20 @@ type Tests() =
     [<Test>]
     member this.TestParse() =
         let query = @"like ""edu"" | first | get ""institution"" | select"
+        
         // printfn "%A" (query |> run queryParse |> getSuccess |> queryEval|> (eval (data.RootElement.EnumerateObject() |> toState)) |> Option.map fst |> Option.get)
         ()
+    [<Test>]
+    member this.TestSpeed() =
+        let cvData = System.IO.File.ReadAllBytes("/Users/albert/RiderProjects/cvParser/cvParser/delays.json")
+        let data = System.Text.Json.JsonDocument.Parse(cvData)
+        let query = @"last like 'stat' like 'fli'"
+        printfn "%A" (query |> run queryParse |> getSuccess |> queryEval|> (eval (mkState data.RootElement)) |> Option.map fst |> Option.get)
+        ()
     
+    [<Test>]
+    member this.TestList() =
+        let query = @"list"
+        printfn "%A" (query |> run queryParse |> getSuccess |> queryEval|> (eval (mkState data.RootElement)) |> Option.map fst |> Option.get)
+        ()
     
