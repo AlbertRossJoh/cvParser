@@ -20,7 +20,6 @@ module Program =
         let app = builder.Build()
 
         app.UseHttpsRedirection()
-        //b.WithOrigins([|""|]).AllowAnyHeader().AllowAnyMethod().AllowCredentials()
         let fb (b: CorsPolicyBuilder) =
             b.WithOrigins([|"http://localhost:3000"|]).AllowAnyHeader().AllowAnyMethod().AllowCredentials()
             ()

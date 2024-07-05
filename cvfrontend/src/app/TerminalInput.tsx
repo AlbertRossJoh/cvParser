@@ -1,9 +1,8 @@
 'use client'
-import {useEffect, useRef, useState} from "react";
-import {LinkedList} from "../../misc/LinkedList";
+import {ChangeEvent, useEffect, useState} from "react";
 import {query} from "../../services/QueryService";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import {dark, docco, nord} from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import {nord} from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 
 export default function TerminalInput() {
@@ -42,25 +41,26 @@ export default function TerminalInput() {
             console.error('Error:', error);
             setResponse('An error occurred');
         }
+        setCommandHisIdx(0);
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit} className="">
-                <div className="flex items-center bg-black text-green-500 p-4 rounded-t shadow-lg w-160">
+                <div className="flex items-center bg-black text-green-500 p-4 rounded shadow-lg w-160 caret-underscore">
                     <span className="pr-2">$</span>
                     <input
                         type="text"
-                        className="bg-black outline-none flex-1 text-green-500"
+                        className="bg-black outline-none flex-1 text-green-500 caret-green-500 caret-block"
                         value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
                         autoFocus
                     />
                 </div>
             </form>
             {response && (
                 <div className="w-160">
-                    <SyntaxHighlighter language='json' style={nord} wrapLines={true} wrapLongLines={true}>
+                    <SyntaxHighlighter language='json' style={nord} wrapLines={true} wrapLongLines={true} >
                         {response}
                     </SyntaxHighlighter>
                 </div>

@@ -1,8 +1,19 @@
 
-const endpoint = "http://localhost:8080/query"
+const endpoint = process.env.NEXT_PUBLIC_BACKENDURL+'/query';
 
-export async function query(input:string){
-    const res = await fetch('http://localhost:8080/query', {
+export interface command{
+    command: string,
+    description: string,
+    usage: string   
+}
+
+export interface legend{
+    commands: command[],
+    examples: string[]
+}
+
+export async function query(input:string): Promise<string> {
+    const res = await fetch(endpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -10,4 +21,9 @@ export async function query(input:string){
         body: JSON.stringify({ query: input }),
     });
     return JSON.stringify(await res.json(), null, 2);
+}
+
+export async function getLegend(): Promise<legend> {
+    let res = await query('help');
+    return JSON.parse(res);
 }

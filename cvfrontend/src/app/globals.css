@@ -11,6 +11,14 @@ html{
   width: 40rem;
 }
 
+.caret-underscore{
+  caret-shape: underscore;
+}
+
+.caret-block{
+  caret-shape: block;
+}
+
 pre {
   white-space: pre-wrap;       /* Since CSS 2.1 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */

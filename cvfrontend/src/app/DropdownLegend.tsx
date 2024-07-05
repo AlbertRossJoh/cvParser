@@ -1,28 +1,20 @@
 'use client'
-import {useCallback, useEffect, useState} from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './../components/ui/card';
-import { Button } from './../components/ui/button';
-import SyntaxHighlighter from "react-syntax-highlighter";
+import {useEffect, useState} from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {command, getLegend} from "../../services/QueryService";
 
 const LegendBox = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [commands, setCommands] = useState<any>([])
-    const [examples, setExamples] = useState<any>([])
+    const [commands, setCommands] = useState<command[]>([])
+    const [examples, setExamples] = useState<string[]>([])
 
     
     useEffect(() => {
         async function getCommands(){
-            const res = await fetch('http://localhost:8080/query', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({query: 'help'}),
-            });
-            const data: any = await res.json();
-            
-            setCommands(data.commands);
-            setExamples(data.examples);
+            let legend = await getLegend();
+            setCommands(legend.commands);
+            setExamples(legend.examples);
         }
         getCommands()
         return()=>{};
@@ -42,7 +34,7 @@ const LegendBox = () => {
                 <CardContent>
                     <div className="mt-4 text-lg font-bold">All commands can be chained</div>
                     <ul className="space-y-2">
-                        {commands?.map((cmd: {command: string, description: string, usage: string}, index: any) => (
+                        {commands?.map((cmd: command, index: any) => (
                             <li key={index}>
                                 <strong>{cmd.command}</strong>: {cmd.description}
                                 <br/>
@@ -52,7 +44,7 @@ const LegendBox = () => {
                     </ul>
                     <h3 className="mt-4 text-lg font-bold">Examples</h3>
                     <ul className="list-disc list-inside space-y-1">
-                        {examples.map((example: string[], index: any) => (
+                        {examples.map((example: string, index: any) => (
                             <li key={index}>
                                 <code>{example}</code>
                             </li>
