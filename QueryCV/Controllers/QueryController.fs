@@ -15,4 +15,5 @@ type QueryController (logger : ILogger<QueryController>) =
 
     [<HttpPost>]
     member _.Post([<FromBody>] query: query) =
+        logger.LogDebug(query.ToString())
         api.query query.query

@@ -2,6 +2,10 @@
   @tailwind components;
   @tailwind utilities;
 
+html{
+  background-color: #2e3440;
+}
+
 
 .w-160{
   width: 40rem;
@@ -14,3 +18,5 @@ pre {
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+

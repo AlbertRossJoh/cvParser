@@ -51,5 +51,5 @@ module cvParser.JsonParse
     
     open System.Text
     
-    let cvData = System.IO.File.ReadAllBytes("/Users/albert/RiderProjects/cvParser/cvParser/CV.json")
+    let cvData = System.IO.File.ReadAllBytes("/src/cvParser/CV.json")
     let data = Json.JsonDocument.Parse(cvData)

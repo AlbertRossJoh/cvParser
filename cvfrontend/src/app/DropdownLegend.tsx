@@ -2,6 +2,7 @@
 import {useCallback, useEffect, useState} from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './../components/ui/card';
 import { Button } from './../components/ui/button';
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 const LegendBox = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,14 +12,14 @@ const LegendBox = () => {
     
     useEffect(() => {
         async function getCommands(){
-            const res = await fetch('http://localhost:5185/query', {
+            const res = await fetch('http://localhost:8080/query', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({query: 'help'}),
             });
-            const data = await res.json();
+            const data: any = await res.json();
             
             setCommands(data.commands);
             setExamples(data.examples);
@@ -41,7 +42,7 @@ const LegendBox = () => {
                 <CardContent>
                     <div className="mt-4 text-lg font-bold">All commands can be chained</div>
                     <ul className="space-y-2">
-                        {commands?.map((cmd, index) => (
+                        {commands?.map((cmd: {command: string, description: string, usage: string}, index: any) => (
                             <li key={index}>
                                 <strong>{cmd.command}</strong>: {cmd.description}
                                 <br/>
@@ -51,7 +52,7 @@ const LegendBox = () => {
                     </ul>
                     <h3 className="mt-4 text-lg font-bold">Examples</h3>
                     <ul className="list-disc list-inside space-y-1">
-                        {examples.map((example, index) => (
+                        {examples.map((example: string[], index: any) => (
                             <li key={index}>
                                 <code>{example}</code>
                             </li>

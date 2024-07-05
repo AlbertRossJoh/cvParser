@@ -1,8 +1,5 @@
 
-interface LinkedList<T> {
-    value : T,
-    next: LinkedList<T>
-}
+
 export class LinkedList<T> {
     value?: T;
     next?: LinkedList<T>;

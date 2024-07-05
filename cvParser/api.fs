@@ -38,4 +38,6 @@ module cvParser.api
                 else
                     JsonDocument.Parse(err1).RootElement
         with
-           | _ -> JsonDocument.Parse(err2).RootElement
+           | e ->
+               System.Console.WriteLine(e)
+               JsonDocument.Parse(err2).RootElement

@@ -1,0 +1,15 @@
+﻿services:
+  querycv:
+    image: querycv
+    build:
+      context: .
+      dockerfile: QueryCV/Dockerfile
+    ports:
+      - 8080:8080
+  frontend:
+    build:
+      context: ./cvfrontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    

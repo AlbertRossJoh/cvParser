@@ -1,20 +1,19 @@
 'use client'
 import {useEffect, useRef, useState} from "react";
 import {LinkedList} from "../../misc/LinkedList";
+import {query} from "../../services/QueryService";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import {dark, docco, nord} from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 
 export default function TerminalInput() {
     const [input, setInput] = useState('help');
     const [response, setResponse] = useState('');
-    const [commandHis, setCommandHis] = useState([]);
+    const [commandHis, setCommandHis] = useState<string[]>([]);
     const [commandHisIdx, setCommandHisIdx] = useState(0);
 
-    
-
     useEffect(() => {
-        function handleKeypress(e){
-            //console.log(e.code)
-            //console.log(commandHis)
+        function handleKeypress(e:any){
             if (e.code === "ArrowUp"){
                 setInput(commandHis[commandHisIdx])
                 if (commandHisIdx < commandHis.length-1){
@@ -32,19 +31,11 @@ export default function TerminalInput() {
             document.removeEventListener('keydown', handleKeypress);
         } 
     }, [commandHisIdx])
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             commandHis.unshift(input);
-            console.log(commandHis);
-            const res = await fetch('http://localhost:5185/query', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ query: input }),
-            });
-            const data = JSON.stringify(await res.json(), null, 2);
+            const data = await query(input);
             setInput("");
             setResponse(data);
         } catch (error) {
@@ -54,7 +45,7 @@ export default function TerminalInput() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 break-words">
+        <div>
             <form onSubmit={handleSubmit} className="">
                 <div className="flex items-center bg-black text-green-500 p-4 rounded-t shadow-lg w-160">
                     <span className="pr-2">$</span>
@@ -68,8 +59,10 @@ export default function TerminalInput() {
                 </div>
             </form>
             {response && (
-                <div className="flex items-center bg-black text-green-500 p-4 shadow-lg w-160">
-                    <pre className="break-words">{response}</pre>
+                <div className="w-160">
+                    <SyntaxHighlighter language='json' style={nord} wrapLines={true} wrapLongLines={true}>
+                        {response}
+                    </SyntaxHighlighter>
                 </div>
             )}
         </div>
